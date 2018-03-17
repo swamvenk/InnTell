@@ -1,0 +1,7 @@
+---
+applications:
+ - name: InnTell
+   random-route: true
+   path: target/InnTell.war
+   memory: 256M
+   instances: 1
