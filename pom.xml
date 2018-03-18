@@ -5,6 +5,14 @@
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     
+    <repositories>
+    	<repository>
+    		<id>alfresco</id>
+    		<name>Alfresco Public</name>
+    		<url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+    	</repository>
+    </repositories>
+    
     <parent>
         <groupId>net.wasdev.wlp.maven.parent</groupId>
         <artifactId>liberty-maven-app-parent</artifactId>
@@ -69,6 +77,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.library}</version>
         </dependency>
+        <dependency>
+    		<groupId>com.ibm.db2.jcc</groupId>
+    		<artifactId>db2jcc4</artifactId>
+    		<version>10.1</version>
+		</dependency>
     </dependencies>
     
     <build>

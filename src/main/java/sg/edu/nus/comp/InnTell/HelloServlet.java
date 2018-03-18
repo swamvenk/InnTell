@@ -28,10 +28,12 @@ public class HelloServlet {
 	public ModelAndView showMessage(
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name) {
 		System.out.println("in controller");
- 
+		DataConnection dc = new DataConnection();
+		String dbValue = dc.getDBResponse();
 		ModelAndView mv = new ModelAndView("helloworld");
 		mv.addObject("message", message);
 		mv.addObject("name", name);
+		mv.addObject("dbValue", dbValue);
 		return mv;
 	}
 }

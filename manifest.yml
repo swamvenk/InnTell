@@ -5,3 +5,5 @@ applications:
    path: target/InnTell.war
    memory: 256M
    instances: 1
+   services:
+   - InnTell-db
