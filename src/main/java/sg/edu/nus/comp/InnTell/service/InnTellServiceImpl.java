@@ -24,7 +24,27 @@ public class InnTellServiceImpl {
 	VisitorProfileImpl visitorProfileImpl;
 	
 	@RequestMapping("/month/{month}/visitors")
-	public List<InnTellModel.TopVisitors> topVisitorsProfile(@PathVariable(value="month") String month) {
+	public List<InnTellModel.TopVisitors> topVisitorsbyMonth(@PathVariable(value="month") int month) {
 		return visitorProfileImpl.getTopVisitorsByMonth(month);
+	}
+	
+	@RequestMapping("/month/{month}/visitors/nohotel")
+	public List<InnTellModel.TopVisitorsNoHotel> topVisitorsbyMonthWithoutHotel(@PathVariable(value="month") int month) {
+		return visitorProfileImpl.getTopVisitorsByMonthWithoutHotel(month);
+	}
+	
+	@RequestMapping("/month/{month}/visitors/purpose-of-visit")
+	public List<InnTellModel.TopVisitorsPurposeOfVisit> topVisitorsbyMonthPurposeOfVisit(@PathVariable(value="month") int month) {
+		return visitorProfileImpl.getTopVisitorsByMonthPurposeOfVisit(month);
+	}
+	
+	@RequestMapping("/month/{month}/visitors/age-group")
+	public List<InnTellModel.VisitorsAgeGroup> visitorsMonthAgeGroup(@PathVariable(value="month") int month) {
+		return visitorProfileImpl.getVisitorsByMonthAgeGroup(month);
+	}
+	
+	@RequestMapping("/month/{month}/hotels/tiers")
+	public List<InnTellModel.HotelTiers> hotelOccupancyRoomRate(@PathVariable(value="month") int month) {
+		return visitorProfileImpl.getHotelTierOccupancyRoomRate(month);
 	}
 }

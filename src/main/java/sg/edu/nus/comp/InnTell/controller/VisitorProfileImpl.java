@@ -14,7 +14,23 @@ public class VisitorProfileImpl {
 	@Autowired
 	DataAccess db;
 	
-	public List<InnTellModel.TopVisitors> getTopVisitorsByMonth(String month) {
+	public List<InnTellModel.TopVisitors> getTopVisitorsByMonth(int month) {
 		return db.getTopVisitors(month);
+	}
+	
+	public List<InnTellModel.TopVisitorsNoHotel> getTopVisitorsByMonthWithoutHotel(int month) {
+		return db.getTopVisitorsNoHotel(month);
+	}
+	
+	public List<InnTellModel.TopVisitorsPurposeOfVisit> getTopVisitorsByMonthPurposeOfVisit(int month) {
+		return db.getTopVisitorsPurposeOfVisit(month);
+	}
+	
+	public List<InnTellModel.VisitorsAgeGroup> getVisitorsByMonthAgeGroup(int month) {
+		return db.getVisitorsAgeGroup(month);
+	}
+	
+	public List<InnTellModel.HotelTiers> getHotelTierOccupancyRoomRate(int month) {
+		return db.getHotelTierOccupancyRoomRate(month);
 	}
 }
