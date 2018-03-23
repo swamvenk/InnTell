@@ -79,5 +79,14 @@ public class Constants {
 				+ " OVER (ORDER BY ROUND(AVG(REVPAR),2) DESC) AS REVRANK,MONTH  FROM "
 				+ "HOTELS_TIER_MONTHLY WHERE TIER = '%s' GROUP BY MONTH) WHERE MONTH = %d";		
 	}
+	
+	static public class ApplicationConstants {
+
+		public static final String ageGroup1 = "Below 18";	
+		public static final String ageGroup2 = "Between 19 and 35";	
+		public static final String ageGroup3 = "Between 36 and 64";	
+		public static final String ageGroup4 = "Above 65";	
+
+	}
 
 }

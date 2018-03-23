@@ -148,17 +148,60 @@ public class DataAccess {
 
 	public List<InnTellModel.VisitorsAgeGroup> getVisitorsAgeGroup(int month) {
 		List<InnTellModel.VisitorsAgeGroup> result = new ArrayList<InnTellModel.VisitorsAgeGroup>();
-		InnTellModel.VisitorsAgeGroup visitor;
+		InnTellModel.VisitorsAgeGroup visitor1 = new InnTellModel.VisitorsAgeGroup();
+		InnTellModel.VisitorsAgeGroup visitor2 = new InnTellModel.VisitorsAgeGroup();
+		InnTellModel.VisitorsAgeGroup visitor3 = new InnTellModel.VisitorsAgeGroup();
+		visitor1.setYear(2013);
+		visitor2.setYear(2014);
+		visitor3.setYear(2015);
+
 		try {
 			Statement stmt = connection.createStatement();
 			String query = String.format(Constants.DB2Queries.ageGroupDistribution, month);
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next() != false) {
-				visitor = new InnTellModel.VisitorsAgeGroup();
-				visitor.setYear(rs.getInt(1));
-				visitor.setAgeGroup(rs.getString(2));
-				visitor.setTotal(rs.getInt(3));
-				result.add(visitor);
+				if(rs.getInt(1) == 2013) {
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup1)) {
+						visitor1.setTotal1(rs.getInt(3));
+					}
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup2)) {
+						visitor1.setTotal2(rs.getInt(3));
+					}
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup3)) {
+						visitor1.setTotal3(rs.getInt(3));
+					}
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup4)) {
+						visitor1.setTotal4(rs.getInt(3));
+					}
+				}
+				if(rs.getInt(1) == 2014) {
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup1)) {
+						visitor2.setTotal1(rs.getInt(3));
+					}
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup2)) {
+						visitor2.setTotal2(rs.getInt(3));
+					}
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup3)) {
+						visitor2.setTotal3(rs.getInt(3));
+					}
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup4)) {
+						visitor2.setTotal4(rs.getInt(3));
+					}
+				}
+				if(rs.getInt(1) == 2013) {
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup1)) {
+						visitor3.setTotal1(rs.getInt(3));
+					}
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup2)) {
+						visitor3.setTotal2(rs.getInt(3));
+					}
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup3)) {
+						visitor3.setTotal3(rs.getInt(3));
+					}
+					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup4)) {
+						visitor3.setTotal4(rs.getInt(3));
+					}
+				}
 			}
 			rs.close();
 			stmt.close();
@@ -173,6 +216,9 @@ public class DataAccess {
 				ex = ex.getNextException();
 			}
 		}
+		result.add(visitor1);
+		result.add(visitor2);
+		result.add(visitor3);
 		return result;
 
 	}

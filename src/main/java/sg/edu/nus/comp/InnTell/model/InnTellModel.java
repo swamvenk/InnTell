@@ -82,17 +82,12 @@ public class InnTellModel {
 
 	static public class VisitorsAgeGroup {
 
-		public String ageGroup;
 		public int year;
-		public int total;
-
-		public String getAgeGroup() {
-			return ageGroup;
-		}
-
-		public void setAgeGroup(String ageGroup) {
-			this.ageGroup = ageGroup;
-		}
+		public int total1;
+		public int total2;
+		public int total3;
+		public int total4;
+				
 
 		public int getYear() {
 			return year;
@@ -102,14 +97,38 @@ public class InnTellModel {
 			this.year = year;
 		}
 
-		public int getTotal() {
-			return total;
+		public int getTotal1() {
+			return total1;
 		}
 
-		public void setTotal(int total) {
-			this.total = total;
+		public void setTotal1(int total1) {
+			this.total1 = total1;
 		}
 
+		public int getTotal2() {
+			return total2;
+		}
+
+		public void setTotal2(int total2) {
+			this.total2 = total2;
+		}
+
+		public int getTotal3() {
+			return total3;
+		}
+
+		public void setTotal3(int total3) {
+			this.total3 = total3;
+		}
+
+		public int getTotal4() {
+			return total4;
+		}
+
+		public void setTotal4(int total4) {
+			this.total4 = total4;
+		}
+		
 	}
 
 	static public class HotelTiers {
