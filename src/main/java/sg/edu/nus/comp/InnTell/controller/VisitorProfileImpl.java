@@ -33,4 +33,14 @@ public class VisitorProfileImpl {
 	public List<InnTellModel.HotelTiers> getHotelTierOccupancyRoomRate(int month) {
 		return db.getHotelTierOccupancyRoomRate(month);
 	}
+	
+	public InnTellModel getAllInnTellData(int month) {
+		InnTellModel result = new InnTellModel();
+		result.setTopVisitors(db.getTopVisitors(month));
+		result.setTopVisitorsNoHotel(db.getTopVisitorsNoHotel(month));
+		result.setPurposeOfVisit(db.getTopVisitorsPurposeOfVisit(month));
+		result.setVisitorsAgeGroup(db.getVisitorsAgeGroup(month));
+		result.setHotelTiers(db.getHotelTierOccupancyRoomRate(month));
+		return result;
+	}
 }

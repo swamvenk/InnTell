@@ -47,4 +47,9 @@ public class InnTellServiceImpl {
 	public List<InnTellModel.HotelTiers> hotelOccupancyRoomRate(@PathVariable(value="month") int month) {
 		return visitorProfileImpl.getHotelTierOccupancyRoomRate(month);
 	}
+	
+	@RequestMapping("/month/{month}")
+	public InnTellModel allInnTellData(@PathVariable(value="month") int month) {
+		return visitorProfileImpl.getAllInnTellData(month);
+	}
 }

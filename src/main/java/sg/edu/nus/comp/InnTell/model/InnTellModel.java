@@ -1,5 +1,7 @@
 package sg.edu.nus.comp.InnTell.model;
 
+import java.util.List;
+
 public class InnTellModel {
 
 	static public class TopVisitors {
@@ -142,52 +144,50 @@ public class InnTellModel {
 
 	}
 
-	public TopVisitors topVisitors;
-	public TopVisitorsNoHotel topVisitorsNoHotel;
-	public TopVisitorsPurposeOfVisit purposeOfVisit;
-	public VisitorsAgeGroup visitorsAgeGroup;
-	public HotelTiers hotelTiers;
+	public List<TopVisitors> topVisitors;
+	public List<TopVisitorsNoHotel> topVisitorsNoHotel;
+	public List<TopVisitorsPurposeOfVisit> purposeOfVisit;
+	public List<VisitorsAgeGroup> visitorsAgeGroup;
+	public List<HotelTiers> hotelTiers;
 
-	public TopVisitors getTopVisitors() {
+	public List<TopVisitors> getTopVisitors() {
 		return topVisitors;
 	}
 
-	public void setTopVisitors(TopVisitors topVisitors) {
+	public void setTopVisitors(List<TopVisitors> topVisitors) {
 		this.topVisitors = topVisitors;
 	}
 
-	public TopVisitorsNoHotel getTopVisitorsNoHotel() {
+	public List<TopVisitorsNoHotel> getTopVisitorsNoHotel() {
 		return topVisitorsNoHotel;
 	}
 
-	public void setTopVisitorsNoHotel(TopVisitorsNoHotel topVisitorsNoHotel) {
+	public void setTopVisitorsNoHotel(List<TopVisitorsNoHotel> topVisitorsNoHotel) {
 		this.topVisitorsNoHotel = topVisitorsNoHotel;
 	}
 
-	public TopVisitorsPurposeOfVisit getPurposeOfVisit() {
+	public List<TopVisitorsPurposeOfVisit> getPurposeOfVisit() {
 		return purposeOfVisit;
 	}
 
-	public void setPurposeOfVisit(TopVisitorsPurposeOfVisit purposeOfVisit) {
+	public void setPurposeOfVisit(List<TopVisitorsPurposeOfVisit> purposeOfVisit) {
 		this.purposeOfVisit = purposeOfVisit;
 	}
 
-	public VisitorsAgeGroup getVisitorsAgeGroup() {
+	public List<VisitorsAgeGroup> getVisitorsAgeGroup() {
 		return visitorsAgeGroup;
 	}
 
-	public void setVisitorsAgeGroup(VisitorsAgeGroup visitorsAgeGroup) {
+	public void setVisitorsAgeGroup(List<VisitorsAgeGroup> visitorsAgeGroup) {
 		this.visitorsAgeGroup = visitorsAgeGroup;
 	}
 
-	public HotelTiers getHotelTiers() {
+	public List<HotelTiers> getHotelTiers() {
 		return hotelTiers;
 	}
 
-	public void setHotelTiers(HotelTiers hotelTiers) {
+	public void setHotelTiers(List<HotelTiers> hotelTiers) {
 		this.hotelTiers = hotelTiers;
 	}
-	
-	
 
 }
