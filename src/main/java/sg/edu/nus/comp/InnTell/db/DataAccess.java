@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import sg.edu.nus.comp.InnTell.constants.Constants;
+import sg.edu.nus.comp.InnTell.model.HotelRank;
 import sg.edu.nus.comp.InnTell.model.InnTellModel;
 
 /**
@@ -30,6 +31,7 @@ public class DataAccess {
 	public DataAccess() {
 		connection = DB2DataBaseConnection.getConnection();
 	}
+
 
 	public List<InnTellModel.TopVisitors> getTopVisitors(int month) {
 		List<InnTellModel.TopVisitors> result = new ArrayList<InnTellModel.TopVisitors>();
@@ -88,6 +90,29 @@ public class DataAccess {
 			}
 		}
 		return result;
+	}
+
+	public int getMonthArrivalRank(int month) {
+		int monthArrivalRank = 0;
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.monthArrivalRank,month));
+			rs.first();
+			monthArrivalRank = Integer.parseInt(rs.getString(1));
+			rs.close();
+			stmt.close();
+			connection.commit();
+		} catch (SQLException ex) {
+			System.err.println("SQLException information");
+			while (ex != null) {
+				System.err.println("Error msg: " + ex.getMessage());
+				System.err.println("SQLSTATE: " + ex.getSQLState());
+				System.err.println("Error code: " + ex.getErrorCode());
+				ex.printStackTrace();
+				ex = ex.getNextException();
+			}
+		}
+		return monthArrivalRank;
 	}
 
 	public List<InnTellModel.TopVisitorsPurposeOfVisit> getTopVisitorsPurposeOfVisit(int month) {
@@ -151,6 +176,32 @@ public class DataAccess {
 		return result;
 
 	}
+	
+	public HotelRank getHotelRank(int month, String tier) {
+		HotelRank hotelRank = new HotelRank();
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.hotelRank,tier,month));
+			rs.first();
+			hotelRank.setAorRank(Integer.parseInt(rs.getString(1)));
+			hotelRank.setArrRank(Integer.parseInt(rs.getString(2)));
+			hotelRank.setRevRank(Integer.parseInt(rs.getString(3)));
+			rs.close();
+			stmt.close();
+			connection.commit();
+		} catch (SQLException ex) {
+			System.err.println("SQLException information");
+			while (ex != null) {
+				System.err.println("Error msg: " + ex.getMessage());
+				System.err.println("SQLSTATE: " + ex.getSQLState());
+				System.err.println("Error code: " + ex.getErrorCode());
+				ex.printStackTrace();
+				ex = ex.getNextException();
+			}
+		}
+		return hotelRank;
+
+	}
 
 	public List<InnTellModel.HotelTiers> getHotelTierOccupancyRoomRate(int month) {
 		List<InnTellModel.HotelTiers> result = new ArrayList<InnTellModel.HotelTiers>();
@@ -180,6 +231,5 @@ public class DataAccess {
 			}
 		}
 		return result;
-
 	}
 }
