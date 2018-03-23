@@ -198,7 +198,7 @@ public class DataAccess {
 						visitor2.setTotal4(rs.getInt(3));
 					}
 				}
-				if(rs.getInt(1) == 2013) {
+				if(rs.getInt(1) == 2015) {
 					if(rs.getString(2).equalsIgnoreCase(Constants.ApplicationConstants.ageGroup1)) {
 						visitor3.setTotal1(rs.getInt(3));
 					}
