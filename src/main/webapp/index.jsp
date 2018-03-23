@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/inntell.css">
+<link rel="stylesheet" href="/css/inntell.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -17,43 +17,42 @@
 	src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-
 <script>
 	function getData() {
 		document.getElementById("loader1").style.display = "block";
 		document.getElementById("loader2").style.display = "block";
 		document.getElementById("loader3").style.display = "block";
-		document.getElementById("loader4").style.display = "block";		
-		
+		document.getElementById("loader4").style.display = "block";
+
 		var e = document.getElementById("inlineFormSelectMonth");
 		var month = e.options[e.selectedIndex].value;
-		
+
 		var f = document.getElementById("inlineFormSelectTier");
 		var tier = f.options[f.selectedIndex].text;
-		
+
 		alert(month);
 		alert(tier);
-		
+
 		$.getJSON("month/".concat(month).concat("/visitors"), function(result){
 	        loadPlot1(result);
 	    });
-		
+
 		$.getJSON("month/".concat(month).concat("/visitors/nohotel"), function(result){
 	        loadPlot2(result);
 	    });
-		
+
 		$.getJSON("month/".concat(month).concat("/visitors/purpose-of-visit"), function(result){
 	        loadPlot3(result);
 	    });
-		
+
 		$.getJSON("month/".concat(month).concat("/visitors/age-group"), function(result){
 	        loadPlot4(result);
 	    });
-		
+
 		$.getJSON("month/".concat(month).concat("/hotels/tiers"), function(result){
 	        loadTable(result);
 	    });
-		
+
 		//$.getJSON("month/".concat("1").concat("/recommendations"), function(result){
 	    //    loadRecommendations(result);
 	    //});
@@ -131,7 +130,7 @@
 		document.getElementById("loader2").style.display = "none";
 	}
 	function loadPlot3(json) {
-		
+
 		var labels = [];
 		var values = [];
 
@@ -162,7 +161,7 @@
 		document.getElementById("loader3").style.display = "none";
 	}
 	function loadPlot4(json) {
-		
+
 		var labels = [];
 		var values1 = [];
 		var values2 = [];
@@ -232,15 +231,15 @@
 		document.getElementById("loader4").style.display = "none";
 
 	}
-	
+
 	function loadTable(result){
-		
+
 	}
-	
+
 	function loadRecommendations(result){
-		
+
 	}
-	
+
 </script>
 </head>
 <body class="body-font">
