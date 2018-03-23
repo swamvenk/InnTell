@@ -29,10 +29,6 @@
 
 		var f = document.getElementById("inlineFormSelectTier");
 		var tier = f.options[f.selectedIndex].text;
-
-		alert(month);
-		alert(tier);
-
 		$.getJSON("month/".concat(month).concat("/visitors"), function(result){
 	        loadPlot1(result);
 	    });
@@ -51,11 +47,10 @@
 
 		$.getJSON("month/".concat(month).concat("/hotels/tiers"), function(result){
 	        loadTable(result);
+	    });		
+		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/recommendation"), function(result){
+	        loadRecommendations(result);
 	    });
-
-		//$.getJSON("month/".concat("1").concat("/recommendations"), function(result){
-	    //    loadRecommendations(result);
-	    //});
 	}
 
 	function loadPlot1(json) {
@@ -233,11 +228,11 @@
 	}
 
 	function loadTable(result){
-
+		alert(result);
 	}
 
 	function loadRecommendations(result){
-
+		alert(result);
 	}
 
 </script>

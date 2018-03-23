@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sg.edu.nus.comp.InnTell.controller.VisitorProfileImpl;
 import sg.edu.nus.comp.InnTell.model.InnTellModel;
+import sg.edu.nus.comp.InnTell.model.Recommendation;
 
 /**
  * This class is the enrty point for all the rest APIs that InnTell has to offer.
@@ -59,5 +60,10 @@ public class InnTellServiceImpl {
 	@RequestMapping("/month/{month}")
 	public InnTellModel allInnTellData(@PathVariable(value="month") int month) {
 		return visitorProfileImpl.getAllInnTellData(month);
+	}
+	
+	@RequestMapping("/month/{month}/hotel/{hotel}/recommendation")
+	public Recommendation hotelRecommendations(@PathVariable(value="month") int month, @PathVariable(value="hotel") String tier) {
+		return visitorProfileImpl.getHotelRecommendations(month, tier);
 	}
 }

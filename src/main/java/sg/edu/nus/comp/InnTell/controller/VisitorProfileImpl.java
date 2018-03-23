@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import sg.edu.nus.comp.InnTell.db.DataAccess;
 import sg.edu.nus.comp.InnTell.model.InnTellModel;
+import sg.edu.nus.comp.InnTell.model.Recommendation;
 
 @Component
 public class VisitorProfileImpl {
@@ -42,5 +43,10 @@ public class VisitorProfileImpl {
 		result.setVisitorsAgeGroup(db.getVisitorsAgeGroup(month));
 		result.setHotelTiers(db.getHotelTierOccupancyRoomRate(month));
 		return result;
+	}
+
+	public Recommendation getHotelRecommendations(int month, String tier) {
+		RecommendationsEngine re = new RecommendationsEngine();
+		return re.getRecommendations(month, tier);
 	}
 }

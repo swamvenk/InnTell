@@ -27,6 +27,11 @@ public class Recommendation {
 	public boolean isIncrease() {
 		return increase;
 	}
+	
+	public boolean getIncrease() {
+		return increase;
+	}
+
 
 	public void setIncrease(boolean increase) {
 		this.increase = increase;
