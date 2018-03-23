@@ -2,7 +2,6 @@ package sg.edu.nus.comp.InnTell.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import sg.edu.nus.comp.InnTell.constants.Constants;
 import sg.edu.nus.comp.InnTell.db.DataAccess;
 import sg.edu.nus.comp.InnTell.model.HotelRank;
 import sg.edu.nus.comp.InnTell.model.Recommendation;
@@ -13,7 +12,7 @@ public class RecommendationsEngine {
 	DataAccess db;
 
 	public double getScoreForArrivals(int monthArrivalRank, HotelRank hotelRank) {
-		return (Double) null;
+		return 0.0;
 	}
 
 	public Recommendation getRecommendations(int month, String tier) {
