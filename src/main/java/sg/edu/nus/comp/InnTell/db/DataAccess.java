@@ -309,7 +309,8 @@ public class DataAccess {
 				visitor = new InnTellModel.HotelTiers();
 				visitor.setTier(rs.getString(1));
 				visitor.setAor(rs.getFloat(2));
-				visitor.setArr(rs.getFloat(3));
+				visitor.setRevpar(rs.getFloat(3));
+				visitor.setArr(rs.getFloat(4));
 				result.add(visitor);
 			}
 			rs.close();

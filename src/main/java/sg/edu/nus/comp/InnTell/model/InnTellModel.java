@@ -136,6 +136,7 @@ public class InnTellModel {
 		public String tier;
 		public float aor;
 		public float arr;
+		public float revpar;
 
 		public String getTier() {
 			return tier;
@@ -159,6 +160,14 @@ public class InnTellModel {
 
 		public void setArr(float arr) {
 			this.arr = arr;
+		}
+
+		public float getRevpar() {
+			return revpar;
+		}
+
+		public void setRevpar(float revpar) {
+			this.revpar = revpar;
 		}
 
 	}
