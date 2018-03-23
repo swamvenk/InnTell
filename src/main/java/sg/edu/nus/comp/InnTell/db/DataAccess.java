@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.springframework.stereotype.Component;
 
 import sg.edu.nus.comp.InnTell.constants.Constants;
@@ -151,9 +152,18 @@ public class DataAccess {
 		InnTellModel.VisitorsAgeGroup visitor1 = new InnTellModel.VisitorsAgeGroup();
 		InnTellModel.VisitorsAgeGroup visitor2 = new InnTellModel.VisitorsAgeGroup();
 		InnTellModel.VisitorsAgeGroup visitor3 = new InnTellModel.VisitorsAgeGroup();
+		InnTellModel.VisitorsAgeGroup visitor4 = new InnTellModel.VisitorsAgeGroup();
+		InnTellModel.VisitorsAgeGroup visitor5 = new InnTellModel.VisitorsAgeGroup();
+		InnTellModel.VisitorsAgeGroup visitor6 = new InnTellModel.VisitorsAgeGroup();
+
 		visitor1.setYear(2013);
 		visitor2.setYear(2014);
 		visitor3.setYear(2015);
+		visitor4.setYear(2016);
+		visitor5.setYear(2017);
+		visitor6.setYear(2018);
+		
+		SimpleRegression reg;
 
 		try {
 			Statement stmt = connection.createStatement();
@@ -216,9 +226,48 @@ public class DataAccess {
 				ex = ex.getNextException();
 			}
 		}
+		
+		reg = new SimpleRegression();
+		reg.addData(visitor1.getYear(),visitor1.getTotal1());
+		reg.addData(visitor2.getYear(),visitor2.getTotal1());
+		reg.addData(visitor3.getYear(),visitor3.getTotal1());
+		visitor4.setTotal1((int) reg.predict(visitor4.getYear()));
+		visitor5.setTotal1((int) reg.predict(visitor5.getYear()));
+		visitor6.setTotal1((int) reg.predict(visitor6.getYear()));
+		
+		reg = new SimpleRegression();
+		reg.addData(visitor1.getYear(),visitor1.getTotal2());
+		reg.addData(visitor2.getYear(),visitor2.getTotal2());
+		reg.addData(visitor3.getYear(),visitor3.getTotal2());
+		visitor4.setTotal2((int) reg.predict(visitor4.getYear()));
+		visitor5.setTotal2((int) reg.predict(visitor5.getYear()));
+		visitor6.setTotal2((int) reg.predict(visitor6.getYear()));
+
+		reg = new SimpleRegression();
+		reg.addData(visitor1.getYear(),visitor1.getTotal3());
+		reg.addData(visitor2.getYear(),visitor2.getTotal3());
+		reg.addData(visitor3.getYear(),visitor3.getTotal3());
+		visitor4.setTotal3((int) reg.predict(visitor4.getYear()));
+		visitor5.setTotal3((int) reg.predict(visitor5.getYear()));
+		visitor6.setTotal3((int) reg.predict(visitor6.getYear()));
+
+		
+		reg = new SimpleRegression();
+		reg.addData(visitor1.getYear(),visitor1.getTotal4());
+		reg.addData(visitor2.getYear(),visitor2.getTotal4());
+		reg.addData(visitor3.getYear(),visitor3.getTotal4());
+		visitor4.setTotal4((int) reg.predict(visitor4.getYear()));
+		visitor5.setTotal4((int) reg.predict(visitor5.getYear()));
+		visitor6.setTotal4((int) reg.predict(visitor6.getYear()));
+
+
 		result.add(visitor1);
 		result.add(visitor2);
 		result.add(visitor3);
+		result.add(visitor4);
+		result.add(visitor5);
+		result.add(visitor6);
+
 		return result;
 
 	}
