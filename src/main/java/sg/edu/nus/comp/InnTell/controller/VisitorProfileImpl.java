@@ -44,9 +44,4 @@ public class VisitorProfileImpl {
 		result.setHotelTiers(db.getHotelTierOccupancyRoomRate(month));
 		return result;
 	}
-
-	public Recommendation getHotelRecommendations(int month, String tier) {
-		RecommendationsEngine re = new RecommendationsEngine();
-		return re.getRecommendations(month, tier);
-	}
 }
