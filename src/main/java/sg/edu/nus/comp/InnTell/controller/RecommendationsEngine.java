@@ -1,11 +1,13 @@
 package sg.edu.nus.comp.InnTell.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import sg.edu.nus.comp.InnTell.db.DataAccess;
 import sg.edu.nus.comp.InnTell.model.HotelRank;
 import sg.edu.nus.comp.InnTell.model.Recommendation;
 
+@Component
 public class RecommendationsEngine {
 
 	@Autowired
