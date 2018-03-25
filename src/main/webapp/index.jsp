@@ -4,22 +4,31 @@
 <title>InnTell</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/inntell.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
-<script src="http://www.chartjs.org/dist/2.7.2/Chart.bundle.js"></script>
-<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+	<script src="http://www.chartjs.org/dist/2.7.2/Chart.bundle.js"></script>
+	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <script>
+
+	function loadDefaultData(){
+			var month = new Date().getMonth();
+			var e = document.getElementById("inlineFormSelectMonth");
+			e.value = month + 1;
+			getData();
+	}
+
 	function getData() {
 		document.getElementById("loader1").style.display = "block";
 		document.getElementById("loader2").style.display = "block";
@@ -68,7 +77,7 @@
 		var barChartData1 = {
       labels: labels,
       datasets: [{
-        label: 'Top Visitors by Nationality',
+        label: 'No of visitors',
         backgroundColor: Chart.helpers.color(window.chartColors.red).alpha(0.5).rgbString(),
         borderColor: window.chartColors.red,
         borderWidth: 1,
@@ -90,7 +99,7 @@
           }
         }
       });
-		document.getElementById("loader1").style.display = "none";
+			document.getElementById("loader1").style.display = "none";
 	}
 
 	function loadPlot2(json) {
@@ -106,35 +115,38 @@
 			values2.push(obj['count']);
 		}
 
-		var data1 = {
-			x : labels,
-			y : values1,
-			name : 'Total Number of Visitors',
-			type : 'bar',
-			text : values1,
-			textposition : 'auto',
-			hoverinfo : labels,
-		};
+		var barChartData2 = {
+      labels: labels,
+      datasets: [{
+        label: 'Total visitors',
+        backgroundColor: Chart.helpers.color(window.chartColors.red).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: values1
+      }, {
+        label: 'Visitors who did not book hotel',
+        backgroundColor: Chart.helpers.color(window.chartColors.blue).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.blue,
+        borderWidth: 1,
+        data: values2
+      }]
+    };
 
-		var data2 = {
-			x : labels,
-			y : values2,
-			name : 'Visitors who did not Book Accomodation',
-			type : 'bar',
-			text : values2,
-			textposition : 'auto',
-			hoverinfo : labels
-		};
+		var ctx = document.getElementById('canvas2').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: barChartData2,
+        options: {
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true
+          }
+        }
+      });
 
-		var dataArray = [];
-		dataArray.push(data1);
-		dataArray.push(data2);
-
-		var layout = {
-			barmode : 'group',
-			title : 'No. of Visitors who did not Book Accomodation',
-		};
-		Plotly.newPlot('myDiv2', dataArray, layout);
 		document.getElementById("loader2").style.display = "none";
 	}
 	function loadPlot3(json) {
@@ -148,24 +160,33 @@
 			values.push(obj['count']);
 		}
 
-		var data = {
-			values : values,
-			labels : labels,
-			name : 'Total Number of Visitors',
-			type : 'pie',
-			text : labels,
-			textposition : 'auto',
-			hoverinfo : labels,
-		};
+		var pieChartData = {
+      datasets: [{
+        label: 'Purpose of Visit',
+        backgroundColor: [
+            window.chartColors.red,
+            window.chartColors.orange,
+            window.chartColors.yellow,
+            window.chartColors.green,
+            window.chartColors.blue,
+          ],
+        data: values,
+      }],
+      labels: labels
+    };
 
-		var dataArray = [];
-		dataArray.push(data);
+		var ctx = document.getElementById('canvas3').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: pieChartData,
+        options: {
+          responsive: true,
+          title: {
+            display: true
+          }
+        }
+      });
 
-		var layout = {
-			title : 'Classification of Visitors by Purpose of their Visit',
-		};
-
-		Plotly.newPlot('myDiv3', dataArray, layout);
 		document.getElementById("loader3").style.display = "none";
 	}
 	function loadPlot4(json) {
@@ -185,57 +206,52 @@
 			values4.push(obj['total4']);
 		}
 
-		var data1 = {
-			x : labels,
-			y : values1,
-			name : 'Below 18',
-			type : 'scatter',
-			text : labels,
-			textposition : 'auto',
-			hoverinfo : labels,
-		};
+		var lineChartData = {
+      labels: labels,
+      datasets: [{
+        label: 'Above 64 years',
+        backgroundColor: window.chartColors.red,
+        borderColor: window.chartColors.red,
+        fill: false,
+        data: values4
+      	}, {
+        label: 'Between 36 and 64',
+        backgroundColor: window.chartColors.blue,
+        borderColor: window.chartColors.blue,
+        fill: false,
+        data: values3
+        }, {
+        label: 'Between 19 and 36',
+        backgroundColor: window.chartColors.green,
+        borderColor: window.chartColors.green,
+        fill: false,
+        data: values2
+        },{
+        label: 'Below 18',
+        backgroundColor: window.chartColors.orange,
+        borderColor: window.chartColors.orange,
+        fill: false,
+        data: values1
+        }]
+    }
 
-		var data2 = {
-			x : labels,
-			y : values2,
-			name : 'Between 19 and 35',
-			type : 'scatter',
-			text : labels,
-			textposition : 'auto',
-			hoverinfo : labels,
-		};
+		var ctx = document.getElementById('canvas4').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: lineChartData,
+        options: {
+          responsive: true,
+          scales: {
+            xAxes: [{
+              display: true,
+            }],
+            yAxes: [{
+              display: true,
+            }]
+          }
+        }
+      });
 
-		var data3 = {
-			x : labels,
-			y : values3,
-			name : 'Between 36 and 64',
-			type : 'scatter',
-			text : labels,
-			textposition : 'auto',
-			hoverinfo : labels,
-		};
-
-		var data4 = {
-			x : labels,
-			y : values4,
-			name : 'Above 64',
-			type : 'scatter',
-			text : labels,
-			textposition : 'auto',
-			hoverinfo : labels,
-		};
-
-		var dataArray = [];
-		dataArray.push(data1);
-		dataArray.push(data2);
-		dataArray.push(data3);
-		dataArray.push(data4);
-
-		var layout = {
-			title : 'Classification of Visitors by Age Group',
-		};
-
-		Plotly.newPlot('myDiv4', dataArray, layout);
 		document.getElementById("loader4").style.display = "none";
 
 	}
@@ -257,20 +273,19 @@
     }
 </style>
 </head>
-<body class="body-font">
+<body class="body-font" onload="loadDefaultData()">
 
 	<div class="jumbotron banner">
 		<div class="inline">
-			<span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span
-				class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> <span
-				class="glyphicon glyphicon-tree-deciduous" aria-hidden="true"></span>
+			<span class="fa fa-home" aria-hidden="true"></span> <span
+				class="fa fa-cutlery" aria-hidden="true"></span> <span
+				class="fa fa-tree" aria-hidden="true"></span>
 			<span class="title-font">InnTell</span>
 		</div>
 	</div>
 
 	<div class="container">
-		<div class="row">
-			<div class="form-inline row">
+		<div class="form-row form-inline">
 				<div class="col-sm-2 form-group">
 					<label class="control-label" for="inlineFormSelectMonth">Month&nbsp; &nbsp;</label>
 					<select class="form-control selcls"	id="inlineFormSelectMonth">
@@ -301,7 +316,6 @@
 					<button type="button" class="btn" style="background-color: #F5D547"
 						onclick="getData(this);">Submit</button>
 				</div>
-			</div>
 		</div>
 	</div>
 	<br />
@@ -309,32 +323,41 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6" style="background-color: #F4EEA9">
-				<h3>Top Visitors by Nationality</h3>
-				<div class="chart" id="chart1">
+			<div class="col-sm-6 card"> <!--style="background-color: #F4F482"-->
+				<div class="card-body">
+				<h3 class="card-title">Top Visitors by Nationality</h3>
+			</div>
+				<div class="chart card-img-bottom" id="chart1">
 					<canvas id="canvas1"></canvas>
 					<div id="loader1" class="loader" style="display: none;"></div>
 				</div>
 			</div>
-			<div class="col-sm-6" style="background-color: #F4F482">
+			<div class="col-sm-6 card"> <!--style="background-color: #F4F482;"-->
+				<div class="card-body">
 				<h3>Top Visitors by Nationality vs Hotel Booking</h3>
-				<div class="chart">
-					<div class="chart" id="myDiv2">
+			</div>
+				<div class="chart card-img-bottom" id="chart2">
+						<canvas id="canvas2"></canvas>
 						<div id="loader2" class="loader" style="display: none;"></div>
-					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row" style="background-color: #F4F482">
-			<div class="col-sm-6">
+		<div class="row"> <!--style="background-color: #F4F482"-->
+			<div class="col-sm-6 card">
+				<div class="card-body">
 				<h3>Purpose of Visit</h3>
-				<div class="chart" id="myDiv3">
+			</div>
+				<div class="chart card-img-bottom" id="chart3">
+					<canvas id="canvas3"></canvas>
 					<div id="loader3" class="loader" style="display: none;"></div>
 				</div>
 			</div>
-			<div class="col-sm-6" style="background-color: #F4EEA9">
+			<div class="col-sm-6 card"> <!--style="background-color: #F4EEA9"-->
+				<div class="card-body">
 				<h3>Age Group of Visitors</h3>
-				<div class="chart" id="myDiv4">
+			</div>
+				<div class="chart card-img-bottom" id="chart4">
+					<canvas id="canvas4"></canvas>
 					<div id="loader4" class="loader" style="display: none;"></div>
 				</div>
 			</div>
