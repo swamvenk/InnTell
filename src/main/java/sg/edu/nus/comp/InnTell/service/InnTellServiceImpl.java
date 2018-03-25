@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import sg.edu.nus.comp.InnTell.controller.RecommendationsEngine;
 import sg.edu.nus.comp.InnTell.controller.VisitorProfileImpl;
 import sg.edu.nus.comp.InnTell.model.InnTellModel;
 import sg.edu.nus.comp.InnTell.model.Recommendation;
@@ -24,6 +25,8 @@ public class InnTellServiceImpl {
 	
 	@Autowired
 	VisitorProfileImpl visitorProfileImpl;
+	@Autowired
+	RecommendationsEngine recommendationsEngine;
 	
 	@RequestMapping("/")
 	public ModelAndView homePage() {
@@ -64,6 +67,6 @@ public class InnTellServiceImpl {
 	
 	@RequestMapping("/month/{month}/hotel/{hotel}/recommendation")
 	public Recommendation hotelRecommendations(@PathVariable(value="month") int month, @PathVariable(value="hotel") String tier) {
-		return visitorProfileImpl.getHotelRecommendations(month, tier);
+		return recommendationsEngine.getRecommendations(month, tier);
 	}
 }
