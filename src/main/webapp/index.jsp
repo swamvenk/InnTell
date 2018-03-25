@@ -15,6 +15,8 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+<script src="http://www.chartjs.org/dist/2.7.2/Chart.bundle.js"></script>
+<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <script>
@@ -67,7 +69,7 @@
       labels: labels,
       datasets: [{
         label: 'Top Visitors by Nationality',
-        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+        backgroundColor: Chart.helpers.color(window.chartColors.red).alpha(0.5).rgbString(),
         borderColor: window.chartColors.red,
         borderWidth: 1,
         data: values
@@ -88,6 +90,7 @@
           }
         }
       });
+		document.getElementById("loader1").style.display = "none";
 	}
 
 	function loadPlot2(json) {
@@ -246,6 +249,13 @@
 	}
 
 </script>
+<style>
+    canvas {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+</style>
 </head>
 <body class="body-font">
 
