@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/inntell.css">
+<link rel="stylesheet" href="css/inntell.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -47,7 +47,7 @@
 
 		$.getJSON("month/".concat(month).concat("/hotels/tiers"), function(result){
 	        loadTable(result);
-	    });		
+	    });
 		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/recommendation"), function(result){
 	        loadRecommendations(result);
 	    });
@@ -63,21 +63,31 @@
 			values.push(obj['count']);
 		}
 
-		var trace1 = {
-			x : labels,
-			y : values,
-			type : 'bar',
-			text : values,
-			textposition : 'auto',
-			hoverinfo : labels,
-		};
+		var barChartData1 = {
+      labels: labels,
+      datasets: [{
+        label: 'Top Visitors by Nationality',
+        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: values
+      }]
+    };
 
-		var data = [ trace1 ];
-		var layout = {
-			title : 'No. of Visitor Arrivals by Nationality',
-		};
-		Plotly.newPlot('myDiv1', data, layout);
-		document.getElementById("loader1").style.display = "none";
+		var ctx = document.getElementById('canvas1').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: barChartData1,
+        options: {
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true
+          }
+        }
+      });
 	}
 
 	function loadPlot2(json) {
@@ -252,10 +262,8 @@
 		<div class="row">
 			<div class="form-inline row">
 				<div class="col-sm-2 form-group">
-					<label class="control-label" for="inlineFormSelectMonth">Month
-						&nbsp; &nbsp; &nbsp;</label> <select class="form-control selcls"
-						id="inlineFormSelectMonth">
-						<option selected>Month</option>
+					<label class="control-label" for="inlineFormSelectMonth">Month&nbsp; &nbsp;</label>
+					<select class="form-control selcls"	id="inlineFormSelectMonth">
 						<option selected value="1">January</option>
 						<option value="2">February</option>
 						<option value="3">March</option>
@@ -271,10 +279,9 @@
 					</select>
 				</div>
 				<div class="col-sm-2 form-group">
-					<label class="control-label" for="inlineFormSelectTier">Tier
-						&nbsp; &nbsp; &nbsp;</label> <select class="form-control selcls"
-						id="inlineFormSelectTier">
-       			        <option selected value="1">ECONOMY</option>
+					<label class="control-label" for="inlineFormSelectTier">Tier&nbsp; &nbsp;</label>
+					<select class="form-control selcls"	id="inlineFormSelectTier">
+       			<option selected value="1">ECONOMY</option>
 						<option value="2">MID-TIER</option>
 						<option value="3">LUXURY</option>
 						<option value="3">UPSCALE</option>
@@ -292,9 +299,10 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6" style="background-color: #F4EEA9">
+			<div class="col-sm-6">  <!--style="background-color: #F4EEA9">-->
 				<h3>Top Visitors by Nationality</h3>
-				<div class="chart" id="myDiv1">
+				<div class="chart" id="chart1">
+					<canvas id="canvas1"></canvas>
 					<div id="loader1" class="loader" style="display: none;"></div>
 				</div>
 			</div>

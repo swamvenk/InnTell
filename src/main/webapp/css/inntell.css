@@ -1,6 +1,6 @@
 .body-font{
-	font-family: fantasy;
-	background-color: #F7F4EA
+	font-family: calibri;
+	/*background-color: #F7F4EA*/
 }
 
 .banner{
@@ -17,7 +17,7 @@
 
 .chart {
     height: 300px;
-    width: 300px;
+    width: -webkit-fill-available;
 }
 
 /* Center the loader */
@@ -63,11 +63,11 @@
 }
 
 @-webkit-keyframes animatebottom {
-  from { bottom:-100px; opacity:0 } 
+  from { bottom:-100px; opacity:0 }
   to { bottom:0px; opacity:1 }
 }
 
-@keyframes animatebottom { 
-  from{ bottom:-100px; opacity:0 } 
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
   to{ bottom:0; opacity:1 }
 }
