@@ -11,13 +11,29 @@
 }
 
 .title-font{
-	color: #F7F1DC;
+	color: #FFFFFF;
 
 }
 
 .chart {
-    height: 400px;
+    height: 350px;
     width: -webkit-fill-available;
+}
+
+.reco-modal {
+  background-color: #fb3;
+  color: white;
+  height: 40px;
+}
+
+.modal {
+   width: 600px;
+   height: 300px;
+   position: absolute;
+   left: 40%;
+   top: 50%;
+   margin-left: -150px;
+   margin-top: -150px;
 }
 
 /* Center the loader */
@@ -29,9 +45,9 @@
   width: 150px;
   height: 150px;
   margin: -75px 0 0 -75px;
-  border: 16px solid #f3f3f3;
+  border: 16px solid #F3F3F3;
   border-radius: 50%;
-  border-top: 16px solid yellow;
+  border-top: 16px solid #F7F4EA;
   width: 50px;
   height: 50px;
   -webkit-animation: spin 2s linear infinite;
@@ -49,8 +65,8 @@
 }
 
 .loader {
- border-top: 16px solid yellow;
- border-bottom: 16px solid yellow;
+ border-top: 16px solid #FFC145;
+ border-bottom: 16px solid #FFC145;
 }
 
 /* Add animation to "page content" */

@@ -30,6 +30,25 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 	}
 
 	function getData() {
+
+		var can1 = document.getElementById('canvas1');
+		var can2 = document.getElementById('canvas2');
+		var can3 = document.getElementById('canvas3');
+		var can4 = document.getElementById('canvas4');
+
+		if(can1 != null){
+			can1.remove();
+		}
+		if(can2 != null){
+			can2.remove();
+		}
+		if(can3 != null){
+			can3.remove();
+		}
+		if(can4 != null){
+			can4.remove();
+		}
+
 		document.getElementById("loader1").style.display = "block";
 		document.getElementById("loader2").style.display = "block";
 		document.getElementById("loader3").style.display = "block";
@@ -65,6 +84,11 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 	}
 
 	function loadPlot1(json) {
+
+		var can1 = document.createElement('canvas');
+		can1.id = "canvas1";
+		document.getElementById('chart1').appendChild(can1);
+
 		var labels = [];
 		var values = [];
 
@@ -103,6 +127,10 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 	}
 
 	function loadPlot2(json) {
+
+		var can2 = document.createElement('canvas');
+		can2.id = "canvas2";
+		document.getElementById('chart2').appendChild(can2);
 
 		var labels = [];
 		var values1 = [];
@@ -151,6 +179,10 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 	}
 	function loadPlot3(json) {
 
+		var can3 = document.createElement('canvas');
+		can3.id = "canvas3";
+		document.getElementById('chart3').appendChild(can3);
+
 		var labels = [];
 		var values = [];
 
@@ -190,6 +222,10 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		document.getElementById("loader3").style.display = "none";
 	}
 	function loadPlot4(json) {
+
+		var can4 = document.createElement('canvas');
+		can4.id = "canvas4";
+		document.getElementById('chart4').appendChild(can4);
 
 		var labels = [];
 		var values1 = [];
@@ -253,11 +289,54 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
       });
 
 		document.getElementById("loader4").style.display = "none";
-
 	}
 
 	function loadTable(result){
-		//alert(result);
+
+		  var myTableDiv = document.getElementById("metrics_table");
+			if(document.getElementById('metric_results') != null){
+				document.getElementById('metric_results').remove();
+			}
+			var div = document.createElement('div');
+			div.id = "metric_results";
+      var table = document.createElement('table');
+      table.className = "table table-striped";
+      var tableBody = document.createElement('tbody');
+
+      table.border = '1';
+      table.appendChild(tableBody);
+
+      var headings = ["Tier", "Avarage Occupancy Rate", "Average Room Rate", "Revenue Per Available Room"];
+
+      var keys = ["tier", "aor", "arr", "revpar"];
+
+      var data = result;
+
+      //TABLE COLUMNS
+      var tr = document.createElement('TR');
+      tableBody.appendChild(tr);
+      for (i = 0; i < headings.length; i++) {
+          var th = document.createElement('TH');
+          th.bgColor = '#FFC145';
+          th.width = '75';
+          var header = document.createTextNode(headings[i]);
+          th.appendChild(header);
+          tr.appendChild(th);
+      }
+
+      //TABLE ROWS
+      for (i = 0; i < data.length; i++) {
+          var tr = document.createElement('TR');
+          for (j = 0; j < keys.length; j++) {
+              var td = document.createElement('TD')
+              td.appendChild(document.createTextNode(data[i][keys[j]]));
+              tr.appendChild(td)
+          }
+          tableBody.appendChild(tr);
+      }
+			div.appendChild(table);
+      myTableDiv.appendChild(div);
+
 	}
 
 	function loadRecommendations(result){
@@ -312,10 +391,15 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 						<option value="3">UPSCALE</option>
 					</select>
 				</div>
-				<div class="col-sm-8">
+				<div class="col-sm-1">
 					<button type="button" class="btn" style="background-color: #F5D547"
 						onclick="getData(this);">Submit</button>
 				</div>
+				<div class="col-sm-7">
+            <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal" data-target="#recoModal">
+              Show Anlytics
+            </button>
+        </div>
 		</div>
 	</div>
 	<br />
@@ -334,7 +418,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 			</div>
 			<div class="col-sm-6 card"> <!--style="background-color: #F4F482;"-->
 				<div class="card-body">
-				<h3>Top Visitors by Nationality vs Hotel Booking</h3>
+				<h3 class="card-title">Top Visitors by Nationality vs Hotel Booking</h3>
 			</div>
 				<div class="chart card-img-bottom" id="chart2">
 						<canvas id="canvas2"></canvas>
@@ -345,7 +429,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		<div class="row"> <!--style="background-color: #F4F482"-->
 			<div class="col-sm-6 card">
 				<div class="card-body">
-				<h3>Purpose of Visit</h3>
+				<h3 class="card-title">Purpose of Visit</h3>
 			</div>
 				<div class="chart card-img-bottom" id="chart3">
 					<canvas id="canvas3"></canvas>
@@ -354,7 +438,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 			</div>
 			<div class="col-sm-6 card"> <!--style="background-color: #F4EEA9"-->
 				<div class="card-body">
-				<h3>Age Group of Visitors</h3>
+				<h3 class="card-title">Age Group of Visitors</h3>
 			</div>
 				<div class="chart card-img-bottom" id="chart4">
 					<canvas id="canvas4"></canvas>
@@ -363,47 +447,35 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 			</div>
 		</div>
 	</div>
+	<br/>
 
-
-	<div class="container" style="padding-top: 20px;">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Tier</th>
-					<th scope="col">Average Occupancy Rate</th>
-					<th scope="col">Average Room Rate</th>
-					<th scope="col">Average Revenue per Available Room</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Blah</td>
-					<td>Blah</td>
-					<td>Blah</td>
-					<td>Blah</td>
-				</tr>
-				<tr>
-					<td>Blah</td>
-					<td>Blah</td>
-					<td>Blah</td>
-					<td>Blah</td>
-				</tr>
-				<tr>
-					<td>Blah</td>
-					<td>Blah</td>
-					<td>Blah</td>
-					<td>Blah</td>
-				</tr>
-				<tr>
-					<td>Blah</td>
-					<td>Blah</td>
-					<td>Blah</td>
-					<td>Blah</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="container">
+		<div class="card">
+			<div class="card-body" id="metrics_table">
+				<h3 class="card-title">Metrics --insert text here--</h3>
+			</div>
+		</div>
 	</div>
+
+	<div class="modal fade" id="recoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-notify modal-warning" role="document">
+          <div class="modal-content">
+              <div class="modal-header reco-modal">
+                  <p class="heading lead">Hotel Recommendation</p>
+              </div>
+              <div class="modal-body">
+                  <div class="text-center">
+                      <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                      <ul style="list-style-type: none;">
+                        <li>In the current trend the pricing needs to be increased/decreased</li>
+                        <li>The increase/decrease in price can range from x to y</li>
+                        <li><i>Recommended cuisine:</i> Indian</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
 
 </body>
 </html>
