@@ -15,8 +15,6 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
-<script src="http://www.chartjs.org/dist/2.7.2/Chart.bundle.js"></script>
-<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <script>
@@ -69,7 +67,7 @@
       labels: labels,
       datasets: [{
         label: 'Top Visitors by Nationality',
-        backgroundColor: Chart.helpers.color(window.chartColors.red).alpha(0.5).rgbString(),
+        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
         borderColor: window.chartColors.red,
         borderWidth: 1,
         data: values
@@ -90,7 +88,6 @@
           }
         }
       });
-		document.getElementById("loader1").style.display = "none";
 	}
 
 	function loadPlot2(json) {
@@ -241,21 +238,14 @@
 	}
 
 	function loadTable(result){
-		//alert(result);
+		alert(result);
 	}
 
 	function loadRecommendations(result){
-		//alert(result);
+		alert(result);
 	}
 
 </script>
-<style>
-    canvas {
-      -moz-user-select: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
-    }
-</style>
 </head>
 <body class="body-font">
 
@@ -309,7 +299,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6" style="background-color: #F4EEA9">
+			<div class="col-sm-6">  <!--style="background-color: #F4EEA9">-->
 				<h3>Top Visitors by Nationality</h3>
 				<div class="chart" id="chart1">
 					<canvas id="canvas1"></canvas>

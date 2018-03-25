@@ -37,11 +37,11 @@ public class RecommendationsEngine {
 		return recommendation;
 	}
 
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 		RecommendationsEngine r = new RecommendationsEngine();
 		for (int i = 1; i <= 12; i++) {
 			System.out.println(i);
 		}
-	}
+	}*/
 
 }
