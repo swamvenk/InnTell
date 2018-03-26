@@ -344,12 +344,14 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		if(modal != null){
 			modal.remove();
 		}
+		
+		var month = $('#inlineFormSelectMonth').find(":selected").value();
+		var tier = $('#inlineFormSelectTier').find(":selected").text();
 
-
-		$.getJSON("https://api.myjson.com/bins/ijwwf", function(result){
+		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/recommendation"), function(result){
 			var list = $("#reco-modal").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
 			var value = result['increase'] == true ? "increase" : "derease"
- 			list.append('<li>'+ 'According to data we advise you to ' + value + ' the price from ' + result['minimum'] + '% to '  + result['maximum'] +'% for the month of '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' in the ' + $('#inlineFormSelectTier').find(":selected").text() +' tier.</li>');
+ 			list.append('<li>'+ 'According to data we advise you to ' + value + ' the price from ' + result['minimum'] + '% to '  + result['maximum'] +'% for the month of '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' in the ' + tier +' tier.</li>');
  			list.append('<li> <i>Recommended cuisine: </i>' + result['foodPreferences'] + '</li>' )
 		})
 	}

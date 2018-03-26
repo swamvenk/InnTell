@@ -24,7 +24,7 @@ public class RecommendationsEngine {
 
 		int monthArrivalRank = db.getMonthArrivalRank(month);
 		HotelStats hotelStat = db.getHotelStats(month, tier);
-		double percentageChange = (hotelStat.getArrPred() - hotelStat.getArrAvg())/hotelStat.getArrAvg();
+		double percentageChange = ((hotelStat.getArrPred() - hotelStat.getArrAvg())/hotelStat.getArrAvg())*100;
 		
 		if(percentageChange < 0) {
 			recommendation.setIncrease(false);
