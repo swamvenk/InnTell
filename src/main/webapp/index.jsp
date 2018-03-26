@@ -35,6 +35,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		var can2 = document.getElementById('canvas2');
 		var can3 = document.getElementById('canvas3');
 		var can4 = document.getElementById('canvas4');
+		
 
 		if(can1 != null){
 			can1.remove();
@@ -48,6 +49,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		if(can4 != null){
 			can4.remove();
 		}
+		
 
 		document.getElementById("loader1").style.display = "block";
 		document.getElementById("loader2").style.display = "block";
@@ -77,9 +79,6 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 
 		$.getJSON("month/".concat(month).concat("/hotels/tiers"), function(result){
 		      loadTable(result);
-		  });
-		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/recommendation"), function(result){
-		      loadRecommendations(result);
 		  });
 	}
 
@@ -339,8 +338,20 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 
 	}
 
-	function loadRecommendations(result){
-		//alert(result);
+	function loadRecommendations(){
+		var modal = document.getElementById('recco-modal');
+
+		if(modal != null){
+			modal.remove();
+		}
+
+
+		$.getJSON("https://api.myjson.com/bins/ijwwf", function(result){
+			var list = $("#reco-modal").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
+			var value = result['increase'] == true ? "increase" : "derease"
+ 			list.append('<li>'+ 'According to data we advise you to ' + value + ' the price from ' + result['minimum'] + '% to '  + result['maximum'] +'% for the month of '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' in the ' + $('#inlineFormSelectTier').find(":selected").text() +' tier.</li>');
+ 			list.append('<li> <i>Recommended cuisine: </i>' + result['foodPreferences'] + '</li>' )
+		})
 	}
 
 </script>
@@ -396,8 +407,9 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 						onclick="getData(this);">Submit</button>
 				</div>
 				<div class="col-sm-7">
-            <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal" data-target="#recoModal">
-              Show Anlytics
+            <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal" 
+            data-target="#recoModal" onclick="loadRecommendations(this);">
+              Show Recommendation
             </button>
         </div>
 		</div>
@@ -452,7 +464,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 	<div class="container">
 		<div class="card">
 			<div class="card-body" id="metrics_table">
-				<h3 class="card-title">Metrics --insert text here--</h3>
+				<h3 class="card-title">Hotel Statistics by Tier</h3>
 			</div>
 		</div>
 	</div>
@@ -460,18 +472,11 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 	<div class="modal fade" id="recoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-notify modal-warning" role="document">
           <div class="modal-content">
-              <div class="modal-header reco-modal">
+              <div class="modal-header" id = "reco-modal">
                   <p class="heading lead">Hotel Recommendation</p>
               </div>
               <div class="modal-body">
-                  <div class="text-center">
-                      <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
-                      <ul style="list-style-type: none;">
-                        <li>In the current trend the pricing needs to be increased/decreased</li>
-                        <li>The increase/decrease in price can range from x to y</li>
-                        <li><i>Recommended cuisine:</i> Indian</li>
-                      </ul>
-                  </div>
+                  <div class="text-center hotel-reco"> </div>
               </div>
           </div>
       </div>
