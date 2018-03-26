@@ -36,8 +36,8 @@ public class RecommendationsEngine {
 
 		if (lowerLimit < 0 && higherLimit < 0) {
 			recommendation.setIncrease(false);
-			recommendation.setMinimum(-lowerLimit);
-			recommendation.setMaximum(-higherLimit);
+			recommendation.setMinimum(-higherLimit);
+			recommendation.setMaximum(-lowerLimit);
 		} else if (lowerLimit > 0 && higherLimit > 0) {
 			recommendation.setIncrease(true);
 			recommendation.setMinimum(lowerLimit);
