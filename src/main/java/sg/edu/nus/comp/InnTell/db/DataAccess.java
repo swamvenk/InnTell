@@ -12,7 +12,7 @@ import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.springframework.stereotype.Component;
 
 import sg.edu.nus.comp.InnTell.constants.Constants;
-import sg.edu.nus.comp.InnTell.model.HotelStats;
+import sg.edu.nus.comp.InnTell.model.HotelStat;
 import sg.edu.nus.comp.InnTell.model.InnTellModel;
 
 /**
@@ -273,8 +273,8 @@ public class DataAccess {
 
 	}
 	
-	public HotelStats getHotelStats(int month, String tier) {
-		HotelStats hotelStat = new HotelStats();
+	public HotelStat getHotelStats(int month, String tier) {
+		HotelStat hotelStat = new HotelStat();
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.hotelStats,tier,month));

@@ -305,7 +305,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
       table.border = '1';
       table.appendChild(tableBody);
 
-      var headings = ["Tier", "Avarage Occupancy Rate", "Average Room Rate", "Revenue Per Available Room"];
+      var headings = ["Tier", "Avarage Occupancy Rate (in %)", "Average Room Rate (in $)", "Revenue Per Available Room (in $)"];
 
       var keys = ["tier", "aor", "arr", "revpar"];
 
@@ -331,11 +331,11 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
               if(keys[j] === 'tier')
 	              td.appendChild(document.createTextNode(data[i][keys[j]]));
               if(keys[j] === 'aor')
-	              td.appendChild(document.createTextNode(data[i][keys[j]].concat("%")));
+	              td.appendChild(document.createTextNode(data[i][keys[j]]));
               if(keys[j] === 'arr')
-	              td.appendChild(document.createTextNode("$ ".concat(data[i][keys[j]])));
+	              td.appendChild(document.createTextNode(data[i][keys[j]])));
               if(keys[j] === 'revpar')
-	              td.appendChild(document.createTextNode("$ ".concat(data[i][keys[j]])));
+	              td.appendChild(document.createTextNode(data[i][keys[j]]));
               tr.appendChild(td)
           }
           tableBody.appendChild(tr);

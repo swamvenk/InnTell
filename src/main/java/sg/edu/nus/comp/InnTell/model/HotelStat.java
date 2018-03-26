@@ -1,6 +1,6 @@
 package sg.edu.nus.comp.InnTell.model;
 
-public class HotelStats {
+public class HotelStat {
 
 	double aorAvg;
 
