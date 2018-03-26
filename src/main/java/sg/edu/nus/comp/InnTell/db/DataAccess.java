@@ -297,7 +297,7 @@ public class DataAccess {
 			hotelStat.setAorPred(reg1.predict(2018));
 			hotelStat.setAorAvg(aorSum/count);
 			hotelStat.setArrAvg(arrSum/count);
-			hotelStat.calculateArrPred();
+			hotelStat.calculateArrLow();
 			rs.close();
 			stmt.close();
 			connection.commit();

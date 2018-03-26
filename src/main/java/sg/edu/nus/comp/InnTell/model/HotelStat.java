@@ -8,7 +8,9 @@ public class HotelStat {
 
 	double aorPred;
 
-	double arrPred;
+	double arrLow = 0.0;
+
+	double arrHigh = 0.0;
 
 	private double elasticity = 2.0;
 
@@ -36,17 +38,38 @@ public class HotelStat {
 		this.aorPred = aorPred;
 	}
 
-	public double getArrPred() {
-		return arrPred;
+	public double getArrLow() {
+		return arrLow;
 	}
 
-	public void setArrPred(double arrPred) {
-		this.arrPred = arrPred;
+	public void setArrLow(double arrLow) {
+		this.arrLow = arrLow;
 	}
 
-	public void calculateArrPred() {
-		this.arrPred = Math.pow((Math.pow(this.arrAvg, this.elasticity) * this.aorPred) / this.aorAvg,
+	public void calculateArrLow() {
+		this.arrLow = Math.pow((Math.pow(this.arrAvg, this.elasticity) * this.aorPred) / this.aorAvg,
 				1 / this.elasticity);
+	}
+
+	public double getArrHigh() {
+		return arrHigh;
+	}
+
+	public void setArrHigh(double arrHigh) {
+		this.arrHigh = arrHigh;
+		if(this.arrHigh < this.arrLow) {
+			double temp = this.arrHigh;
+			this.arrHigh = this.arrLow;
+			this.arrLow = temp;
+		}
+	}
+
+	public double getElasticity() {
+		return elasticity;
+	}
+
+	public void setElasticity(double elasticity) {
+		this.elasticity = elasticity;
 	}
 
 }

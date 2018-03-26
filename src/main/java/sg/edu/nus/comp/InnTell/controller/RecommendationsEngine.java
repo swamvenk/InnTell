@@ -28,18 +28,26 @@ public class RecommendationsEngine {
 		HotelStat hotelStat = db.getHotelStats(month, tier);
 		updatePredictedPrice(hotelStat, month);
 
-		double percentageChange = BigDecimal.valueOf((((hotelStat.getArrPred() - price) / price) * 100))
+		double lowerLimit = BigDecimal.valueOf((((hotelStat.getArrLow() - price) / price) * 100))
 				.setScale(2, RoundingMode.HALF_UP).doubleValue();
 
-		if (percentageChange < 0) {
+		double higherLimit = BigDecimal.valueOf((((hotelStat.getArrHigh() - price) / price) * 100))
+				.setScale(2, RoundingMode.HALF_UP).doubleValue();
+
+		if (lowerLimit < 0 && higherLimit < 0) {
 			recommendation.setIncrease(false);
-			percentageChange = -percentageChange;
+			recommendation.setMinimum(-lowerLimit);
+			recommendation.setMaximum(-higherLimit);
+		} else if (lowerLimit > 0 && higherLimit > 0) {
+			recommendation.setIncrease(true);
+			recommendation.setMinimum(lowerLimit);
+			recommendation.setMaximum(higherLimit);
 		} else {
 			recommendation.setIncrease(true);
+			recommendation.setMinimum(0);
+			recommendation.setMaximum(higherLimit);
 		}
 
-		recommendation.setMinimum(percentageChange - 0.5);
-		recommendation.setMaximum(percentageChange + 0.4);
 		recommendation.setFoodPreferences(getFoodPreferences(month));
 
 		return recommendation;
@@ -58,13 +66,13 @@ public class RecommendationsEngine {
 
 		List<TopVisitors> topCountries = db.getTopVisitors(month);
 		List<String> foodPreferences = new ArrayList<String>();
-		
+
 		for (TopVisitors t : topCountries) {
 			if (food.get(t.getCountry()) != null) {
 				foodPreferences.add(food.get(t.getCountry()));
 			}
 		}
-		
+
 		foodPreferences.add("Continental");
 		return foodPreferences;
 	}
@@ -74,21 +82,21 @@ public class RecommendationsEngine {
 		double percentChange = 0.0;
 
 		int monthArrivalRank = db.getMonthArrivalRank(month);
-		percentChange += (6.5 - monthArrivalRank) * 0.2;
+		percentChange += (6.5 - monthArrivalRank) * 0.01;
 
 		int monthRevenueRank = db.getMonthRevenueRank(month);
-		percentChange += (6.5 - monthRevenueRank) * 0.1;
+		percentChange += (6.5 - monthRevenueRank) * 0.01;
 
 		int monthAgeGroupRank = db.getMonthAgeGroupRank(month);
-		percentChange += (6.5 - monthAgeGroupRank) * 0.2;
+		percentChange += (6.5 - monthAgeGroupRank) * 0.02;
 
 		int monthRegionRank = db.getMonthRegionRank(month);
-		percentChange += (6.5 - monthRegionRank) * 0.2;
+		percentChange += (6.5 - monthRegionRank) * 0.02;
 
 		int monthRainfallRank = db.getMonthRainfallRank(month);
-		percentChange += (6.5 - monthRegionRank) * 0.1;
+		percentChange += (6.5 - monthRainfallRank) * 0.01;
 
-		hotelStat.setArrPred(hotelStat.getArrPred() + (hotelStat.getArrPred() * percentChange));
+		hotelStat.setArrHigh(hotelStat.getArrLow() + (hotelStat.getArrLow() * percentChange));
 
 	}
 
