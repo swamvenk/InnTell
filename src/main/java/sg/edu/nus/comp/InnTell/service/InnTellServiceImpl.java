@@ -65,8 +65,8 @@ public class InnTellServiceImpl {
 		return visitorProfileImpl.getAllInnTellData(month);
 	}
 	
-	@RequestMapping("/month/{month}/hotel/{hotel}/recommendation")
-	public Recommendation hotelRecommendations(@PathVariable(value="month") int month, @PathVariable(value="hotel") String tier) {
-		return recommendationsEngine.getRecommendations(month, tier);
+	@RequestMapping("/month/{month}/hotel/{hotel}/price/{price}/recommendation")
+	public Recommendation hotelRecommendations(@PathVariable(value="month") int month, @PathVariable(value="hotel") String tier, @PathVariable(value="price") double price) {
+		return recommendationsEngine.getRecommendations(month, tier, price);
 	}
 }

@@ -17,14 +17,12 @@ public class RecommendationsEngine {
 		return 0.0;
 	}
 
-	public Recommendation getRecommendations(int month, String tier) {
+	public Recommendation getRecommendations(int month, String tier, double price) {
 
 		Recommendation recommendation = new Recommendation();
-		double score = 0.0;
 
-		int monthArrivalRank = db.getMonthArrivalRank(month);
 		HotelStats hotelStat = db.getHotelStats(month, tier);
-		double percentageChange = ((hotelStat.getArrPred() - hotelStat.getArrAvg())/hotelStat.getArrAvg())*100;
+		double percentageChange = ((hotelStat.getArrPred() - price)/price)*100;
 		
 		if(percentageChange < 0) {
 			recommendation.setIncrease(false);
@@ -34,7 +32,7 @@ public class RecommendationsEngine {
 			recommendation.setIncrease(true);
 		}
 		
-		recommendation.setMinimum(percentageChange-0.4);
+		recommendation.setMinimum(percentageChange-0.5);
 		recommendation.setMaximum(percentageChange+0.4);
 		
 		//score += getScoreForArrivals(monthArrivalRank, hotelRank);

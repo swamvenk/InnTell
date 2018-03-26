@@ -345,10 +345,11 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 			modal.remove();
 		}
 		
-		var month = $('#inlineFormSelectMonth').find(":selected").value();
+		var month = $('#inlineFormSelectMonth').find(":selected").val();
 		var tier = $('#inlineFormSelectTier').find(":selected").text();
+		var price = $('#inlineFormInputPrice').val();
 
-		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/recommendation"), function(result){
+		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/price/").concat(price).concat("/recommendation"), function(result){
 			var list = $("#reco-modal").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
 			var value = result['increase'] == true ? "increase" : "derease"
  			list.append('<li>'+ 'According to data we advise you to ' + value + ' the price from ' + result['minimum'] + '% to '  + result['maximum'] +'% for the month of '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' in the ' + tier +' tier.</li>');
@@ -404,11 +405,15 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 						<option value="3">UPSCALE</option>
 					</select>
 				</div>
+				<div class="col-sm-4 form-group">
+				   <label class="control-label" for="inlineFormInputPrice">Your Price: &nbsp; &nbsp;</label>
+		           <input type="text" class="form-control" id="inlineFormInputPrice" placeholder="Your Price:" value="200">
+		        </div>
 				<div class="col-sm-1">
 					<button type="button" class="btn" style="background-color: #F5D547"
 						onclick="getData(this);">Submit</button>
 				</div>
-				<div class="col-sm-7">
+				<div class="col-sm-2">
             <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal" 
             data-target="#recoModal" onclick="loadRecommendations(this);">
               Show Recommendation
