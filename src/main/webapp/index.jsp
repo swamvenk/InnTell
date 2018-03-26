@@ -350,10 +350,10 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		var price = $('#inlineFormInputPrice').val();
 
 		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/price/").concat(price).concat("/recommendation"), function(result){
-			var list = $("#reco-modal").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
+			var list = $("#hotel-reco").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
 			var value = result['increase'] == true ? "increase" : "decrease"
  			list.append('<li>'+ 'According to our analytics, we advise you to ' + value + ' your price by ' + result['minimum'] + '% to '  + result['maximum'] +'% in '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' for ' + tier +' tier.</li>');
- 			list.append('<li> <i>Recommended cuisine: </i>' + result['foodPreferences'].join(", ") + '</li>' )
+ 			list.append('<br /><li> <i>Recommended Cuisines: </i>' + result['foodPreferences'].join(", ") + '</li>' )
 		})
 	}
 
@@ -480,11 +480,11 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 	<div class="modal fade" id="recoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-notify modal-warning" role="document">
           <div class="modal-content">
-              <div class="modal-header" id = "reco-modal">
-                  <p class="heading lead">Hotel Recommendation</p>
+              <div class="modal-header" id = "reco-modal" style="background-color: #FFC145;">
+                  <p class="heading lead">What You Need To Do</p>
               </div>
               <div class="modal-body">
-                  <div class="text-center hotel-reco"> </div>
+                  <div class="text-center hotel-reco" id= "hotel-reco"> </div>
               </div>
           </div>
       </div>

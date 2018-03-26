@@ -346,56 +346,6 @@ public class DataAccess {
 	}
 
 
-	public int getMonthBusinessArrivalRank(int month) {
-		int monthRank = 0;
-		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.monthBusinessArrivalRank,month));
-			while(rs.next()) {
-				monthRank = Integer.parseInt(rs.getString(1));
-			}
-			rs.close();
-			stmt.close();
-			connection.commit();
-		} catch (SQLException ex) {
-			System.err.println("SQLException information");
-			while (ex != null) {
-				System.err.println("Error msg: " + ex.getMessage());
-				System.err.println("SQLSTATE: " + ex.getSQLState());
-				System.err.println("Error code: " + ex.getErrorCode());
-				ex.printStackTrace();
-				ex = ex.getNextException();
-			}
-		}
-		return monthRank;
-	}
-
-
-	public int getMonthLeisureArrivalRank(int month) {
-		int monthRank = 0;
-		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.monthLeisureArrivalRank,month));
-			while(rs.next()) {
-				monthRank = Integer.parseInt(rs.getString(1));
-			}
-			rs.close();
-			stmt.close();
-			connection.commit();
-		} catch (SQLException ex) {
-			System.err.println("SQLException information");
-			while (ex != null) {
-				System.err.println("Error msg: " + ex.getMessage());
-				System.err.println("SQLSTATE: " + ex.getSQLState());
-				System.err.println("Error code: " + ex.getErrorCode());
-				ex.printStackTrace();
-				ex = ex.getNextException();
-			}
-		}
-		return monthRank;
-	}
-
-
 	public int getMonthRevenueRank(int month) {
 		int monthRank = 0;
 		try {
@@ -451,6 +401,30 @@ public class DataAccess {
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.monthRegionRank,month));
+			while(rs.next()) {
+				monthRank = Integer.parseInt(rs.getString(1));
+			}
+			rs.close();
+			stmt.close();
+			connection.commit();
+		} catch (SQLException ex) {
+			System.err.println("SQLException information");
+			while (ex != null) {
+				System.err.println("Error msg: " + ex.getMessage());
+				System.err.println("SQLSTATE: " + ex.getSQLState());
+				System.err.println("Error code: " + ex.getErrorCode());
+				ex.printStackTrace();
+				ex = ex.getNextException();
+			}
+		}
+		return monthRank;
+	}
+	
+	public int getMonthRainfallRank(int month) {
+		int monthRank = 0;
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.monthRainfallRank,month));
 			while(rs.next()) {
 				monthRank = Integer.parseInt(rs.getString(1));
 			}

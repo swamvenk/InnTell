@@ -79,16 +79,28 @@ public class Constants {
 				+ "ROUND(ARR,2) AS ARR, ROUND(REVPAR,2) AS REVPAR FROM HOTELS_TIER_MONTHLY"
 				+ " WHERE TIER = '%s' AND MONTH = %d";		
 		
-		public static final String monthBusinessArrivalRank = "";
+		public static final String monthRevenueRank = "SELECT RANK FROM "
+				+ "(SELECT ROW_NUMBER() OVER (ORDER BY ROUND(AVG(REVPAR),2) DESC)"
+				+ " AS RANK, MONTH  FROM HOTELS_MONTHLY GROUP BY MONTH) WHERE MONTH = %d";
 		
-		public static final String monthLeisureArrivalRank = "";
+		public static final String monthAgeGroupRank = "SELECT RANK FROM(SELECT"
+				+ " ROW_NUMBER() OVER (ORDER BY ROUND(AVG(TOTAL),2) DESC) AS RANK, "
+				+ "MONTH  FROM VISITORS_AGE_GROUP_MONTHLY WHERE AGE_GROUP = "
+				+ "'Between 36 and 64' GROUP BY MONTH) WHERE MONTH = %d";
 		
-		public static final String monthRevenueRank = "";
+		public static final String monthRegionRank = "SELECT RANK FROM(SELECT ROW_NUMBER()"
+				+ " OVER"
+				+ " (ORDER BY ROUND(AVG(TOTAL),2) DESC) AS RANK, MONTH  FROM "
+				+ "VISITORS_ARRIVAL_MONTHLY GROUP BY MONTH) WHERE (COUNTRY = 'KUWAIT'"
+				+ " OR COUNTRY = 'UNITED ARAB EMIRATES' OR COUNTRY = 'USA' OR COUNTRY"
+				+ " = 'QATAR' OR COUNTRY = 'AUSTRALIA' OR COUNTRY = 'BRUNEI' OR COUNTRY"
+				+ " = 'SAUDI ARABIA') AND MONTH = %d";	
 		
-		public static final String monthAgeGroupRank = "";
-		
-		public static final String monthRegionRank = "";
-	}
+		public static final String monthRainfallRank = "SELECT RANK FROM"
+				+ "(SELECT ROW_NUMBER() OVER (ORDER BY ROUND(AVG(RAINFALL),2) ASC)"
+				+ " AS RANK, MONTH  FROM CLIMATE_RAINFALL_MONTHLY GROUP BY MONTH) "
+				+ "WHERE MONTH = %d";
+		}
 	
 	static public class ApplicationConstants {
 
