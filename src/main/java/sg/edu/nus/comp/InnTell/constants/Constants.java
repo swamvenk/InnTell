@@ -43,7 +43,7 @@ public class Constants {
 
 	static public class DB2Queries {
 
-		public static final String topVisitors = "SELECT COUNTRY, ROUND(AVG(TOTAL),2) AS TOTAL "
+		public static final String topVisitors = "SELECT COUNTRY, ROUND(AVG(TOTAL),0) AS TOTAL "
 				+ "from VISITORS_NATIONALITY_MONTHLY WHERE MONTH = %d AND COUNTRY!= 'ASEAN' "
 				+ "GROUP BY COUNTRY ORDER BY TOTAL DESC LIMIT 5";
 
