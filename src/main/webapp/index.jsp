@@ -351,9 +351,9 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 
 		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/price/").concat(price).concat("/recommendation"), function(result){
 			var list = $("#reco-modal").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
-			var value = result['increase'] == true ? "increase" : "derease"
- 			list.append('<li>'+ 'According to data we advise you to ' + value + ' the price from ' + result['minimum'] + '% to '  + result['maximum'] +'% for the month of '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' in the ' + tier +' tier.</li>');
- 			list.append('<li> <i>Recommended cuisine: </i>' + result['foodPreferences'] + '</li>' )
+			var value = result['increase'] == true ? "increase" : "decrease"
+ 			list.append('<li>'+ 'According to our analytics, we advise you to ' + value + ' your price from ' + result['minimum'] + '% to '  + result['maximum'] +'% in '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' for ' + tier +' tier.</li>');
+ 			list.append('<li> <i>Recommended cuisine: </i>' + result['foodPreferences'].join(", ") + '</li>' )
 		})
 	}
 
@@ -373,7 +373,8 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 			<span class="fa fa-home" aria-hidden="true"></span> <span
 				class="fa fa-cutlery" aria-hidden="true"></span> <span
 				class="fa fa-tree" aria-hidden="true"></span>
-			<span class="title-font">InnTell</span>
+				<span class="title-font">InnTell </span>
+		        <span class="title-desc">Effective Hotel Management using Prospective Customer Insights</span>
 		</div>
 	</div>
 
@@ -407,7 +408,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 				</div>
 				<div class="col-sm-4 form-group">
 				   <label class="control-label" for="inlineFormInputPrice">Your Price: &nbsp; &nbsp;</label>
-		           <input type="text" class="form-control" id="inlineFormInputPrice" placeholder="Your Price:" value="200">
+		           <input type="text" class="form-control" id="inlineFormInputPrice" placeholder="Price" value="200">
 		        </div>
 				<div class="col-sm-1">
 					<button type="button" class="btn" style="background-color: #F5D547"
@@ -416,7 +417,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 				<div class="col-sm-2">
             <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal" 
             data-target="#recoModal" onclick="loadRecommendations(this);">
-              Show Recommendation
+              Show Recommendations
             </button>
         </div>
 		</div>

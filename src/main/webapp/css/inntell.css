@@ -15,6 +15,11 @@
 
 }
 
+.title-desc{
+  font-size: 25px;
+  color: #F7F1DC;
+}
+
 .chart {
     height: 350px;
     width: -webkit-fill-available;

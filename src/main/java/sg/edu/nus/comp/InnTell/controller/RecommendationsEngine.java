@@ -22,28 +22,25 @@ public class RecommendationsEngine {
 		Recommendation recommendation = new Recommendation();
 
 		HotelStats hotelStat = db.getHotelStats(month, tier);
-		double percentageChange = ((hotelStat.getArrPred() - price)/price)*100;
-		
-		if(percentageChange < 0) {
+		double percentageChange = Math.round((((hotelStat.getArrPred() - price) / price) * 100) * 100.0) / 100.0;
+
+		if (percentageChange < 0) {
 			recommendation.setIncrease(false);
-			percentageChange = - percentageChange;
-		}
-		else {
+			percentageChange = -percentageChange;
+		} else {
 			recommendation.setIncrease(true);
 		}
-		
-		recommendation.setMinimum(percentageChange-0.5);
-		recommendation.setMaximum(percentageChange+0.4);
-		
-		//score += getScoreForArrivals(monthArrivalRank, hotelRank);
 
-		/*if (score < 0) {
-			recommendation.setIncrease(false);
-		}
+		recommendation.setMinimum(percentageChange - 0.5);
+		recommendation.setMaximum(percentageChange + 0.4);
 
-		else {
-			recommendation.setIncrease(true);
-		}*/
+		// score += getScoreForArrivals(monthArrivalRank, hotelRank);
+
+		/*
+		 * if (score < 0) { recommendation.setIncrease(false); }
+		 * 
+		 * else { recommendation.setIncrease(true); }
+		 */
 
 		return recommendation;
 	}
