@@ -278,23 +278,19 @@ public class DataAccess {
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.hotelStats,tier,month));
-			SimpleRegression reg1 = new SimpleRegression();
-			SimpleRegression reg2 = new SimpleRegression();
-			SimpleRegression reg3 = new SimpleRegression();
+			SimpleRegression reg = new SimpleRegression();
 			
 			int count = 0;
 			double arrSum = 0.0;
 			double aorSum = 0.0;
 			
 			while (rs.next() != false) {
-				reg1.addData(rs.getInt(1),rs.getDouble(2));				
+				reg.addData(rs.getInt(1),rs.getDouble(2));				
 				count++;
 				aorSum += rs.getDouble(2);
 				arrSum += rs.getDouble(3);
-				//reg2.addData(rs.getInt(1),rs.getInt(3));
-				//reg3.addData(rs.getInt(1),rs.getInt(4));
 			}
-			hotelStat.setAorPred(reg1.predict(2018));
+			hotelStat.setAorPred(reg.predict(2018));
 			hotelStat.setAorAvg(aorSum/count);
 			hotelStat.setArrAvg(arrSum/count);
 			hotelStat.calculateArrLow();

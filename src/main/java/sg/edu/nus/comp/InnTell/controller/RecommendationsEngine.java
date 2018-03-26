@@ -82,21 +82,21 @@ public class RecommendationsEngine {
 		double percentChange = 0.0;
 
 		int monthArrivalRank = db.getMonthArrivalRank(month);
-		percentChange += (6.5 - monthArrivalRank) * 0.01;
+		percentChange += (6.5 - monthArrivalRank) * 0.1;
 
 		int monthRevenueRank = db.getMonthRevenueRank(month);
-		percentChange += (6.5 - monthRevenueRank) * 0.01;
+		percentChange += (6.5 - monthRevenueRank) * 0.1;
 
 		int monthAgeGroupRank = db.getMonthAgeGroupRank(month);
-		percentChange += (6.5 - monthAgeGroupRank) * 0.02;
+		percentChange += (6.5 - monthAgeGroupRank) * 0.2;
 
 		int monthRegionRank = db.getMonthRegionRank(month);
-		percentChange += (6.5 - monthRegionRank) * 0.02;
+		percentChange += (6.5 - monthRegionRank) * 0.2;
 
 		int monthRainfallRank = db.getMonthRainfallRank(month);
-		percentChange += (6.5 - monthRainfallRank) * 0.01;
+		percentChange += (6.5 - monthRainfallRank) * 0.1;
 
-		hotelStat.setArrHigh(hotelStat.getArrLow() + (hotelStat.getArrLow() * percentChange));
+		hotelStat.setArrHigh(hotelStat.getArrLow() + (hotelStat.getArrLow() * (percentChange/100)));
 
 	}
 
