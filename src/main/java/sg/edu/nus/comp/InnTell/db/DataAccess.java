@@ -98,8 +98,9 @@ public class DataAccess {
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.monthArrivalRank,month));
-			rs.first();
-			monthArrivalRank = Integer.parseInt(rs.getString(1));
+			while(rs.next()) {
+				monthArrivalRank = Integer.parseInt(rs.getString(1));
+			}
 			rs.close();
 			stmt.close();
 			connection.commit();
@@ -310,8 +311,7 @@ public class DataAccess {
 				ex = ex.getNextException();
 			}
 		}
-		return null;
-
+		return hotelStat;
 	}
 
 	public List<InnTellModel.HotelTiers> getHotelTierOccupancyRoomRate(int month) {
