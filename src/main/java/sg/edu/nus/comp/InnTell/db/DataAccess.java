@@ -12,7 +12,7 @@ import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.springframework.stereotype.Component;
 
 import sg.edu.nus.comp.InnTell.constants.Constants;
-import sg.edu.nus.comp.InnTell.model.HotelRank;
+import sg.edu.nus.comp.InnTell.model.HotelStats;
 import sg.edu.nus.comp.InnTell.model.InnTellModel;
 
 /**
@@ -272,15 +272,31 @@ public class DataAccess {
 
 	}
 	
-	public HotelRank getHotelRank(int month, String tier) {
-		HotelRank hotelRank = new HotelRank();
+	public HotelStats getHotelStats(int month, String tier) {
+		HotelStats hotelStat = new HotelStats();
 		try {
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.hotelRank,tier,month));
-			rs.first();
-			hotelRank.setAorRank(Integer.parseInt(rs.getString(1)));
-			hotelRank.setArrRank(Integer.parseInt(rs.getString(2)));
-			hotelRank.setRevRank(Integer.parseInt(rs.getString(3)));
+			ResultSet rs = stmt.executeQuery(String.format(Constants.DB2Queries.hotelStats,tier,month));
+			SimpleRegression reg1 = new SimpleRegression();
+			SimpleRegression reg2 = new SimpleRegression();
+			SimpleRegression reg3 = new SimpleRegression();
+			
+			int count = 0;
+			double arrSum = 0.0;
+			double aorSum = 0.0;
+			
+			while (rs.next() != false) {
+				reg1.addData(rs.getInt(1),rs.getDouble(2));				
+				count++;
+				aorSum += rs.getDouble(2);
+				arrSum += rs.getDouble(3);
+				//reg2.addData(rs.getInt(1),rs.getInt(3));
+				//reg3.addData(rs.getInt(1),rs.getInt(4));
+			}
+			hotelStat.setAorPred(reg1.predict(2018));
+			hotelStat.setAorAvg(aorSum/count);
+			hotelStat.setArrAvg(arrSum/count);
+			hotelStat.calculateArrPred();
 			rs.close();
 			stmt.close();
 			connection.commit();
@@ -294,7 +310,7 @@ public class DataAccess {
 				ex = ex.getNextException();
 			}
 		}
-		return hotelRank;
+		return null;
 
 	}
 

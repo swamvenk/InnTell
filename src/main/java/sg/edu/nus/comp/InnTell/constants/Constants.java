@@ -73,11 +73,9 @@ public class Constants {
 				+ " (ORDER BY ROUND(AVG(TOTAL),2) DESC) AS RANK, MONTH  FROM "
 				+ "VISITORS_ARRIVAL_MONTHLY GROUP BY MONTH) WHERE MONTH = %d";
 		
-		public static final String hotelRank = "SELECT AORRANK, ARRRANK, REVRANK "
-				+ "FROM(SELECT ROW_NUMBER() OVER (ORDER BY ROUND(AVG(AOR),2) DESC) AS AORRANK,"
-				+ " ROW_NUMBER() OVER (ORDER BY ROUND(AVG(ARR),2) DESC) AS ARRRANK, ROW_NUMBER()"
-				+ " OVER (ORDER BY ROUND(AVG(REVPAR),2) DESC) AS REVRANK,MONTH  FROM "
-				+ "HOTELS_TIER_MONTHLY WHERE TIER = '%s' GROUP BY MONTH) WHERE MONTH = %d";		
+		public static final String hotelStats = "SELECT YEAR, ROUND(AOR,2) AS AOR, "
+				+ "ROUND(ARR,2) AS ARR, ROUND(REVPAR,2) AS REVPAR FROM HOTELS_TIER_MONTHLY"
+				+ " WHERE TIER = '%s' AND MONTH = %d";		
 	}
 	
 	static public class ApplicationConstants {
