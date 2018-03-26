@@ -305,7 +305,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
       table.border = '1';
       table.appendChild(tableBody);
 
-      var headings = ["Tier", "Avarage Occupancy Rate (in %)", "Average Room Rate (in $)", "Revenue Per Available Room (in $)"];
+      var headings = ["Tier", "Average Occupancy Rate (in %)", "Average Room Rate (in $)", "Revenue Per Available Room (in $)"];
 
       var keys = ["tier", "aor", "arr", "revpar"];
 
@@ -352,7 +352,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/price/").concat(price).concat("/recommendation"), function(result){
 			var list = $("#reco-modal").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
 			var value = result['increase'] == true ? "increase" : "decrease"
- 			list.append('<li>'+ 'According to our analytics, we advise you to ' + value + ' your price from ' + result['minimum'] + '% to '  + result['maximum'] +'% in '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' for ' + tier +' tier.</li>');
+ 			list.append('<li>'+ 'According to our analytics, we advise you to ' + value + ' your price by ' + result['minimum'] + '% to '  + result['maximum'] +'% in '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' for ' + tier +' tier.</li>');
  			list.append('<li> <i>Recommended cuisine: </i>' + result['foodPreferences'].join(", ") + '</li>' )
 		})
 	}
@@ -417,7 +417,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 				<div class="col-sm-2">
             <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal" 
             data-target="#recoModal" onclick="loadRecommendations(this);">
-              Show Recommendations
+              Recommend
             </button>
         </div>
 		</div>
