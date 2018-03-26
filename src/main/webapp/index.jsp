@@ -328,14 +328,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
           var tr = document.createElement('TR');
           for (j = 0; j < keys.length; j++) {
               var td = document.createElement('TD')
-              if(keys[j] === 'tier')
-	              td.appendChild(document.createTextNode(data[i][keys[j]]));
-              if(keys[j] === 'aor')
-	              td.appendChild(document.createTextNode(data[i][keys[j]]));
-              if(keys[j] === 'arr')
-	              td.appendChild(document.createTextNode(data[i][keys[j]])));
-              if(keys[j] === 'revpar')
-	              td.appendChild(document.createTextNode(data[i][keys[j]]));
+              td.appendChild(document.createTextNode(data[i][keys[j]]));
               tr.appendChild(td)
           }
           tableBody.appendChild(tr);
