@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/inntell.css">
+<link rel="icon" href="favicon.ico">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -35,7 +36,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		var can2 = document.getElementById('canvas2');
 		var can3 = document.getElementById('canvas3');
 		var can4 = document.getElementById('canvas4');
-		
+
 
 		if(can1 != null){
 			can1.remove();
@@ -49,7 +50,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		if(can4 != null){
 			can4.remove();
 		}
-		
+
 
 		document.getElementById("loader1").style.display = "block";
 		document.getElementById("loader2").style.display = "block";
@@ -344,17 +345,17 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		if(modal != null){
 			modal.remove();
 		}
-		
+
 		var month = $('#inlineFormSelectMonth').find(":selected").val();
 		var tier = $('#inlineFormSelectTier').find(":selected").text();
 		var price = $('#inlineFormInputPrice').val();
 
 		$.getJSON("month/".concat(month).concat("/hotel/").concat(tier).concat("/price/").concat(price).concat("/recommendation"), function(result){
-			var list = $("#hotel-reco").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
-			var value = result['increase'] == true ? "increase" : "decrease"
- 			list.append('<li>'+ 'According to our analytics, we advise you to ' + value + ' your price by ' + result['minimum'] + '% to '  + result['maximum'] +'% in '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' for ' + tier +' tier.</li>');
- 			list.append('<br /><li> <i>Recommended Cuisines: </i>' + result['foodPreferences'].join(", ") + '</li>' )
-		})
+	    var list = $("#hotel-reco").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
+	    var value = result['increase'] == true ? "increase" : "decrease"
+	    list.append('<li>'+ 'According to our analytics, we advise you to ' + value + ' your price by ' + result['minimum'] + '% to '  + result['maximum'] +'% in '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' for ' + tier +' tier.</li>');
+	    list.append('<br /><li> <i>Recommended Cuisines: </i>' + result['foodPreferences'].join(", ") + '</li>' )
+	  })
 	}
 
 </script>
@@ -406,16 +407,16 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 						<option value="3">UPSCALE</option>
 					</select>
 				</div>
-				<div class="col-sm-4 form-group">
-				   <label class="control-label" for="inlineFormInputPrice">Your Price &nbsp; &nbsp;</label>
+				<div class="col-sm-3 form-group">
+				   <label class="control-label" for="inlineFormInputPrice">Your Price &nbsp; </label>
 		           <input type="text" class="form-control" id="inlineFormInputPrice" placeholder="Price" value="200">
 		        </div>
 				<div class="col-sm-1">
 					<button type="button" class="btn" style="background-color: #F5D547"
 						onclick="getData(this);">Submit</button>
 				</div>
-				<div class="col-sm-2">
-            <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal" 
+				<div class="col-sm-4">
+            <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal"
             data-target="#recoModal" onclick="loadRecommendations(this);">
               Recommend
             </button>
@@ -467,14 +468,14 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 			</div>
 		</div>
 	</div>
-	<br/>
-
 	<div class="container">
-		<div class="card">
+		<div class= "row">
+		<div class="card col-sm-12">
 			<div class="card-body" id="metrics_table">
 				<h3 class="card-title">Hotel Statistics by Tier</h3>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<div class="modal fade" id="recoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
