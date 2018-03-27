@@ -16,8 +16,8 @@
 }
 
 .title-desc{
-  font-size: 25px;
-  color: #F7F1DC;
+  font-size: 20px;
+  color: #FFFFFF;
 }
 
 .chart {
@@ -81,6 +81,10 @@
   -webkit-animation-duration: 1s;
   animation-name: animatebottom;
   animation-duration: 1s
+}
+
+.table {
+   text-align: center;
 }
 
 @-webkit-keyframes animatebottom {

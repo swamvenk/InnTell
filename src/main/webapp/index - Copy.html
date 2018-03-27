@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/inntell.css">
+<link rel="icon" href="favicon.ico">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -35,7 +36,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		var can2 = document.getElementById('canvas2');
 		var can3 = document.getElementById('canvas3');
 		var can4 = document.getElementById('canvas4');
-		
+
 
 		if(can1 != null){
 			can1.remove();
@@ -49,7 +50,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		if(can4 != null){
 			can4.remove();
 		}
-		
+
 
 		document.getElementById("loader1").style.display = "block";
 		document.getElementById("loader2").style.display = "block";
@@ -62,24 +63,24 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 		var f = document.getElementById("inlineFormSelectTier");
 		var tier = f.options[f.selectedIndex].text;
 		$.getJSON("https://api.myjson.com/bins/tt08f", function(result){
-	        loadPlot1(result);
-	    });
+					loadPlot1(result);
+			});
 
 		$.getJSON("https://api.myjson.com/bins/cjfov", function(result){
-	        loadPlot2(result);
-	    });
+					loadPlot2(result);
+			});
 
 		$.getJSON("https://api.myjson.com/bins/d4van", function(result){
-	        loadPlot3(result);
-	    });
+					loadPlot3(result);
+			});
 
 		$.getJSON("https://api.myjson.com/bins/14it4f", function(result){
-	        loadPlot4(result);
-	    });
+					loadPlot4(result);
+			});
 
 		$.getJSON("https://api.myjson.com/bins/t7kmn", function(result){
-	        loadTable(result);
-	    });
+					loadTable(result);
+			});
 	}
 
 	function loadPlot1(json) {
@@ -305,7 +306,7 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
       table.border = '1';
       table.appendChild(tableBody);
 
-      var headings = ["Tier", "Avarage Occupancy Rate", "Average Room Rate", "Revenue Per Available Room"];
+      var headings = ["Tier", "Average Occupancy Rate (in %)", "Average Room Rate (in $)", "Revenue Per Available Room (in $)"];
 
       var keys = ["tier", "aor", "arr", "revpar"];
 
@@ -345,12 +346,15 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 			modal.remove();
 		}
 
+		var month = $('#inlineFormSelectMonth').find(":selected").val();
+		var tier = $('#inlineFormSelectTier').find(":selected").text();
+		var price = $('#inlineFormInputPrice').val();
 
 		$.getJSON("https://api.myjson.com/bins/ijwwf", function(result){
-			var list = $("#reco-modal").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
+			var list = $("#hotel-reco").append('<ul id="recco-modal" style="list-style-type: none;"></ul>').find('ul');
 			var value = result['increase'] == true ? "increase" : "derease"
- 			list.append('<li>'+ 'According to data we advise you to ' + value + ' the price from ' + result['minimum'] + '% to '  + result['maximum'] +'% for the month of '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' in the ' + $('#inlineFormSelectTier').find(":selected").text() +' tier.</li>');
- 			list.append('<li> <i>Recommended cuisine: </i>' + result['foodPreferences'] + '</li>' )
+			list.append('<li>'+ 'According to data we advise you to ' + value + ' the price from ' + result['minimum'] + '% to '  + result['maximum'] +'% for the month of '+ $('#inlineFormSelectMonth').find(":selected").text()+ ' in the ' + $('#inlineFormSelectTier').find(":selected").text() +' tier.</li>');
+			list.append('<li> <i>Recommended cuisine: </i>' + result['foodPreferences'] + '</li>' )
 		})
 	}
 
@@ -370,7 +374,8 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 			<span class="fa fa-home" aria-hidden="true"></span> <span
 				class="fa fa-cutlery" aria-hidden="true"></span> <span
 				class="fa fa-tree" aria-hidden="true"></span>
-			<span class="title-font">InnTell</span>
+				<span class="title-font">InnTell </span>
+		        <span class="title-desc">Effective Hotel Management using Prospective Customer Insights</span>
 		</div>
 	</div>
 
@@ -402,14 +407,18 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 						<option value="3">UPSCALE</option>
 					</select>
 				</div>
+				<div class="col-sm-3 form-group">
+				   <label class="control-label" for="inlineFormInputPrice">Your Price &nbsp; </label>
+		           <input type="text" class="form-control" id="inlineFormInputPrice" placeholder="Price" value="200">
+		        </div>
 				<div class="col-sm-1">
 					<button type="button" class="btn" style="background-color: #F5D547"
 						onclick="getData(this);">Submit</button>
 				</div>
-				<div class="col-sm-7">
-            <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal" 
+				<div class="col-sm-4">
+            <button type="button" class="btn" style="background-color:#F5D547;" data-toggle="modal"
             data-target="#recoModal" onclick="loadRecommendations(this);">
-              Show Recommendation
+              Recommend
             </button>
         </div>
 		</div>
@@ -459,24 +468,24 @@ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCm
 			</div>
 		</div>
 	</div>
-	<br/>
-
 	<div class="container">
-		<div class="card">
+		<div class= "row">
+		<div class="card col-sm-12">
 			<div class="card-body" id="metrics_table">
 				<h3 class="card-title">Hotel Statistics by Tier</h3>
 			</div>
 		</div>
 	</div>
+	</div>
 
 	<div class="modal fade" id="recoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-notify modal-warning" role="document">
           <div class="modal-content">
-              <div class="modal-header" id = "reco-modal">
-                  <p class="heading lead">Hotel Recommendation</p>
+              <div class="modal-header" id = "reco-modal" style="background-color: #FFC145;">
+                  <p class="heading lead">What You Need To Do</p>
               </div>
               <div class="modal-body">
-                  <div class="text-center hotel-reco"> </div>
+                  <div class="text-center hotel-reco" id= "hotel-reco"> </div>
               </div>
           </div>
       </div>
