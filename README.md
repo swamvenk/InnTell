@@ -13,12 +13,12 @@ InnTell is a SaaS application deployed in IBM Bluemix. The service is up and run
 - [JQuery](https://jquery.com/)
 
 ### 2.2 REST Server
--[Spring MVC](https://spring.io/guides/gs/serving-web-content/)
--[Jackson Object Mapper](https://github.com/FasterXML/jackson)
--[Maven](https://maven.apache.org/)
+- [Spring MVC](https://spring.io/guides/gs/serving-web-content/)
+- [Jackson Object Mapper](https://github.com/FasterXML/jackson)
+- [Maven](https://maven.apache.org/)
 
 ### 2.3 IBM Bluemix DB2 Database
--[DB2 Warehouse](https://www.ibm.com/sg-en/marketplace/db2-warehouse)
+- [DB2 Warehouse](https://www.ibm.com/sg-en/marketplace/db2-warehouse)
 
 ## 3. Usage
 Inntell is deployed in a Liberty PaaS environment in IBM Bluemix. The PaaS environment has a IBM Websphere Application Server that accepts a *war* package. Below are the steps to build a *war* package using Maven build tool.
