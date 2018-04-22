@@ -24,6 +24,7 @@ InnTell is a SaaS application deployed in IBM Bluemix. The service is up and run
 Inntell is deployed in a Liberty PaaS environment in IBM Bluemix. The PaaS environment has a IBM Websphere Application Server that accepts a *war* package. Below are the steps to build a *war* package using Maven build tool.
 
 > Please setup Maven in the build environment by following ["Maven setup"](https://maven.apache.org/install.html)
+
 > [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) is required.
 
 ```
